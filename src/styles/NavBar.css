@@ -1,0 +1,164 @@
+/* =========================================
+   NAVBAR – ULTRA PREMIUM UI
+   ========================================= */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  height: 90px;
+  /* Efecto Glassmorphism Refinado */
+  background: rgba(5, 8, 22, 0.85); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* Línea inferior dorada sutil */
+  border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* LOGO - Escalado Elegante */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo-img {
+  height: 55px; /* Altura optimizada para no saturar */
+  object-fit: contain;
+  filter: brightness(1.1);
+  transition: transform 0.3s ease;
+}
+
+.navbar__logo-img:hover {
+  transform: scale(1.03);
+}
+
+/* MENÚ DESKTOP */
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.navbar__menu a {
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem; /* Pequeño y sofisticado */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px; /* Mayor interletrado = más lujo */
+  padding: 10px 0;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+/* Link Activo - Estilo Dorado */
+.navbar__menu a.active {
+  color: var(--color-accent, #C5A059);
+}
+
+/* Hover - Línea de luz minimalista */
+.navbar__menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent, #C5A059);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.navbar__menu a:hover {
+  color: #fff;
+}
+
+.navbar__menu a:hover::after {
+  width: 100%;
+}
+
+/* BOTÓN HAMBURGUESA (Solo Mobile) */
+.navbar__toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-accent, #C5A059);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.navbar__toggle:hover {
+  transform: scale(1.1);
+}
+
+/* BOTÓN CERRAR (Solo Mobile Overlay) */
+.navbar__close {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--color-accent, #C5A059);
+  cursor: pointer;
+}
+
+/* =========================================
+   MOBILE OVERLAY – LUXURY EXPERIENCE
+   ========================================= */
+
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0 5%;
+    height: 75px;
+  }
+
+  .navbar__toggle {
+    display: block;
+  }
+
+  .navbar__menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 100%; /* Full screen overlay */
+    background: var(--color-primary, #050816);
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 3000;
+  }
+
+  .navbar__menu.open {
+    right: 0;
+  }
+
+  .navbar__menu a {
+    color: #fff;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+  }
+
+  .navbar__menu a.active {
+    border-bottom: 1px solid var(--color-accent, #C5A059);
+  }
+
+  .navbar__close {
+    display: block;
+  }
+}
+
+/* Efecto al hacer scroll (opcional, requiere lógica JS para añadir clase .scrolled) */
+.navbar.scrolled {
+  height: 70px;
+  background: rgba(5, 8, 22, 0.98);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
