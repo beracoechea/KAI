@@ -1,67 +1,74 @@
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../styles/Navbar.css'
 import Logo from '../assets/image/Logo.jpeg'
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
+  const toggleMenu = () => setMenuOpen(!menuOpen)
   const closeMenu = () => setMenuOpen(false)
+
+  // Bloquear scroll cuando el menú está abierto
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [menuOpen])
 
   return (
     <header className="navbar">
       {/* Logo */}
       <div className="navbar__logo">
-        <img
-          src={Logo}
-          alt="KAI Logo"
-          className="navbar__logo-img"
-        />
+        <NavLink to="/" onClick={closeMenu}>
+          <img
+            src={Logo}
+            alt="ED Institute Logo"
+            className="navbar__logo-img"
+          />
+        </NavLink>
       </div>
 
-      {/* Botón hamburguesa */}
+      {/* Botón hamburguesa - Visible solo en móvil */}
       <button
         className="navbar__toggle"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle menu"
+        onClick={toggleMenu}
+        aria-label="Abrir menú"
       >
         ☰
       </button>
 
-      {/* Navegación */}
+      {/* Navegación - Overlay en móvil, Fila en Desktop */}
       <nav className={`navbar__menu ${menuOpen ? 'open' : ''}`}>
         <button
           className="navbar__close"
           onClick={closeMenu}
-          aria-label="Close menu"
+          aria-label="Cerrar menú"
         >
           ✕
         </button>
 
-        <NavLink to="/" onClick={closeMenu}>
+        <NavLink to="/" onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>
           Inicio
         </NavLink>
 
-        <NavLink to="/quienes-somos" onClick={closeMenu}>
+        <NavLink to="/about" onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>
           Quiénes Somos
         </NavLink>
 
-        <NavLink to="/experience-park" onClick={closeMenu}>
+        <NavLink to="/experience-park" onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>
           Experience Park
         </NavLink>
 
-        <NavLink to="/training-bmp" onClick={closeMenu}>
+        <NavLink to="/training-bmp" onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>
           Training BMP
         </NavLink>
-
-        <NavLink to="/spots-media" onClick={closeMenu}>
-          Spots & Media
-        </NavLink>
-
-        <NavLink to="/contacto" onClick={closeMenu}>
-          Contacto
-        </NavLink>
       </nav>
+      
+      {/* Fondo oscuro detrás del menú para mayor enfoque (Opcional) */}
+      {menuOpen && <div className="navbar__overlay-bg" onClick={closeMenu}></div>}
     </header>
   )
 }

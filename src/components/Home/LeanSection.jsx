@@ -15,7 +15,7 @@ export const LeanSection = () => {
     "Nada puede reemplazar los beneficios de capacitar y desarrollar el talento."
   ];
 
-  const CardRow = ({ title, subtitle, principles, colorType }) => (
+  const CardRow = ({ title, subtitle, principles }) => (
     <div className="principle-row">
       <div className="row-header">
         <h2 className="row-title">{title}</h2>
@@ -28,7 +28,10 @@ export const LeanSection = () => {
             key={index} 
             className={`principle-card ${index % 2 === 0 ? 'color-main' : 'color-alt'}`}
           >
-            <div className="card-number">0{index + 1}</div>
+            <div className="card-top">
+              <span className="card-number">0{index + 1}</span>
+              <div className="card-dot"></div>
+            </div>
             <p className="card-text">{text}</p>
             <div className="card-arrow">→</div>
           </div>
@@ -45,7 +48,9 @@ export const LeanSection = () => {
         principles={leanPrinciples}
       />
       
-      <div className="section-divider"></div>
+      <div className="section-divider">
+        <div className="divider-icon">ED</div>
+      </div>
 
       <CardRow 
         title="Principios DO Gestalt" 
@@ -57,113 +62,148 @@ export const LeanSection = () => {
         .lean-container {
           max-width: var(--container-max);
           margin: 0 auto;
-          padding: var(--section-padding);
+          padding: clamp(60px, 10vw, 120px) 20px;
         }
 
-        /* Header de Fila */
+        /* Header Estilo Editorial */
         .row-header {
-          margin-bottom: 40px;
-          position: relative;
+          margin-bottom: clamp(30px, 5vw, 50px);
+          text-align: left;
         }
 
         .row-title {
-          font-size: clamp(2rem, 3.5vw, 3.5rem);
+          font-size: clamp(1.8rem, 4vw, 3.2rem);
           color: var(--color-primary);
-          font-weight: 700;
-          margin: 0;
+          font-weight: 800;
           text-transform: uppercase;
           letter-spacing: -1px;
+          line-height: 1;
         }
 
         .row-subtitle {
-          font-size: 1.1rem;
+          font-size: clamp(0.9rem, 1.2vw, 1.1rem);
           color: var(--color-success);
-          margin: 5px 0 15px 0;
-          font-weight: 500;
-          letter-spacing: 1px;
+          margin: 10px 0;
+          font-weight: 600;
+          letter-spacing: 2px;
+          text-transform: uppercase;
         }
 
         .title-underline {
-          width: 60px;
+          width: 80px;
           height: 4px;
           background: var(--color-accent);
+          margin-top: 15px;
         }
 
-        /* Grid y Cards */
+        /* Grid de tarjetas optimizado */
         .cards-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 10px;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 15px;
         }
 
         .principle-card {
-          padding: 50px 30px;
-          min-height: 320px;
+          padding: 40px 30px;
+          min-height: 280px;
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
           position: relative;
-          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-          cursor: default;
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+          border-radius: 4px; /* Un toque sutil para no verse tan rígido */
         }
 
-        .principle-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-          z-index: 10;
-        }
-
-        /* Alternancia de colores con la nueva paleta */
-        .color-main {
-          background-color: var(--color-primary); /* Azul */
-        }
-
-        .color-alt {
-          background-color: var(--color-success); /* Verde */
+        .card-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
         }
 
         .card-number {
           font-size: 0.8rem;
-          color: rgba(255, 255, 255, 0.4);
-          font-weight: 700;
-          margin-bottom: 20px;
+          color: rgba(255, 255, 255, 0.5);
+          font-weight: 800;
           letter-spacing: 2px;
+        }
+
+        .card-dot {
+          width: 6px;
+          height: 6px;
+          background: var(--color-accent);
+          border-radius: 50%;
         }
 
         .card-text {
           color: white;
-          font-size: 1.05rem;
-          line-height: 1.5;
-          text-align: left;
+          font-size: clamp(1rem, 1.1vw, 1.1rem);
+          line-height: 1.6;
           font-weight: 400;
+          margin: 0;
         }
 
         .card-arrow {
-          position: absolute;
-          bottom: 30px;
-          right: 30px;
-          color: var(--color-accent); /* Café Dorado */
-          font-size: 1.8rem;
-          transition: transform 0.3s ease;
+          align-self: flex-end;
+          color: rgba(255, 255, 255, 0.3);
+          font-size: 1.5rem;
+          margin-top: 20px;
+          transition: 0.3s ease;
         }
 
-        .principle-card:hover .card-arrow {
-          transform: translateX(5px);
-          color: white;
+        /* Colores Paleta Consultoría */
+        .color-main { background-color: var(--color-primary); }
+        .color-alt { background-color: var(--color-secondary); } /* Cambié a secondary para mejor armonía */
+
+        /* Efectos Hover (Deshabilitados sutilmente en móvil para UX) */
+        @media (min-width: 1025px) {
+          .principle-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(24, 35, 96, 0.2);
+          }
+          .principle-card:hover .card-arrow {
+            transform: translateX(8px);
+            color: var(--color-accent);
+          }
         }
 
+        /* Divisor de Sección */
         .section-divider {
-          margin: 100px 0;
+          margin: clamp(60px, 10vw, 100px) 0;
           height: 1px;
-          background: linear-gradient(to right, var(--color-border), transparent);
+          background: var(--color-border);
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
 
-        @media (max-width: 1100px) {
-          .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .divider-icon {
+          background: white;
+          padding: 0 20px;
+          color: var(--color-border);
+          font-weight: 800;
+          font-size: 0.7rem;
+          letter-spacing: 4px;
         }
 
-        @media (max-width: 600px) {
-          .cards-grid { grid-template-columns: 1fr; }
-          .row-title { font-size: 2.2rem; }
+        /* --- AJUSTES MÓVILES --- */
+        @media (max-width: 768px) {
+          .lean-container { padding: 50px 15px; }
+          
+          .cards-grid {
+            grid-template-columns: 1fr; /* Una sola columna para legibilidad */
+            gap: 12px;
+          }
+
+          .principle-card {
+            min-height: auto; /* Que la card crezca según el texto */
+            padding: 35px 25px;
+          }
+
+          .row-title { text-align: left; }
+          
+          .section-divider { margin: 60px 0; }
         }
       `}</style>
     </section>

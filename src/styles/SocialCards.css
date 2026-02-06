@@ -1,0 +1,152 @@
+/* Contenedor General */
+.social-section {
+  padding: var(--section-padding);
+  background-color: var(--color-bg);
+}
+
+.social-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* --- ESTILO ESCRITORIO (Row Elegante) --- */
+.member-card {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  background: var(--color-bg);
+  transition: transform 0.4s ease;
+}
+
+.member-card__image-area {
+  position: relative;
+  flex-shrink: 0;
+  width: 220px;
+  height: 220px;
+}
+
+.member-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%; /* Círculo perfecto */
+  border: 1px solid var(--color-border);
+  padding: 8px; /* Espacio entre círculo y borde */
+  transition: all 0.5s ease;
+}
+
+.member-card:hover .member-img {
+  border-color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.member-card__content {
+  flex-grow: 1;
+}
+
+.member-role-tag {
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.member-name {
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.member-desc {
+  color: var(--color-text-light);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+}
+
+.member-socials {
+  display: flex;
+  gap: 2rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.mobile-wave { display: none; } /* Oculta en escritorio */
+
+/* --- ESTILO MÓVIL (Refinado) --- */
+@media (max-width: 768px) {
+  .member-card {
+    flex-direction: column;
+    gap: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-luxe);
+    background-color: var(--color-primary); /* Fondo oscuro para el texto */
+  }
+
+  .member-card__image-area {
+    width: 100%;
+    height: 350px;
+  }
+
+  .member-img {
+    border-radius: 0;
+    padding: 0;
+    border: none;
+    filter: brightness(0.9);
+  }
+
+  /* La Ola: Divisor orgánico entre foto y texto */
+  .mobile-wave {
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    width: 100%;
+    line-height: 0;
+  }
+
+  .mobile-wave svg {
+    width: 100%;
+    height: 60px;
+    fill: var(--color-primary); /* Une la foto con el fondo inferior */
+  }
+
+  .member-card__content {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .member-name {
+    color: white !important;
+    font-size: 1.8rem;
+  }
+
+  .member-desc {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    margin: 1rem auto;
+  }
+
+  .member-socials {
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .social-icon {
+    color: var(--color-accent);
+  }
+}

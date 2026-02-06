@@ -5,8 +5,8 @@ export const Services = ({ imageId = "03" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [flippedIndex, setFlippedIndex] = useState(null);
 
-  const handleFlip = (index, e) => {
-    if (e.target.closest('.back-btn')) return;
+  const handleFlip = (index) => {
+    // En móvil, esto permite alternar el giro con un toque
     setFlippedIndex(flippedIndex === index ? null : index);
   };
 
@@ -16,21 +16,21 @@ export const Services = ({ imageId = "03" }) => {
       tag: "Capacidad",
       desc: "Transformamos el potencial en competencia técnica mediante metodologías de alto rendimiento.",
       details: ["Workshops In-Company", "Certificaciones Técnicas", "Simuladores de Procesos", "Evaluación de Competencias"],
-      color: "#2d6a4f" 
+      color: "var(--color-success)" // Usamos tus variables globales
     },
     { 
       title: "Coaching", 
       tag: "Liderazgo",
       desc: "Acompañamiento estratégico de alta dirección para asegurar la madurez organizacional.",
       details: ["Mentoring Ejecutivo", "Alineación de Mandos Medios", "Gestión del Cambio", "Cultura de Resultados"],
-      color: "#0a192f" 
+      color: "var(--color-primary)" 
     },
     { 
       title: "Guide", 
       tag: "Estructura",
       desc: "Sistemas de control y material táctico diseñado para la sostenibilidad del modelo de negocio.",
       details: ["Manuales Operativos", "Software de Seguimiento", "Dashboards de Control", "Gobierno Corporativo"],
-      color: "#8b5e3c" 
+      color: "var(--color-accent)" 
     }
   ];
 
@@ -71,10 +71,11 @@ export const Services = ({ imageId = "03" }) => {
             <div 
               key={i} 
               className={`flip-card ${flippedIndex === i ? 'is-flipped' : ''}`}
-              onClick={(e) => handleFlip(i, e)}
+              onClick={() => handleFlip(i)}
             >
               <div className="flip-card-inner">
                 
+                {/* Frente de la Card */}
                 <div className="flip-card-front">
                   <div className="card-top">
                     <span className="card-tag" style={{ color: s.color }}>{s.tag}</span>
@@ -83,19 +84,19 @@ export const Services = ({ imageId = "03" }) => {
                   <h3 className="card-name">{s.title}</h3>
                   <p className="card-info">{s.desc}</p>
                   <div className="card-link-mock">
-                    Click para detalles <span className="arrow">→</span>
+                    Detalles <span className="arrow">→</span>
                   </div>
                 </div>
 
-                <div className="flip-card-back" style={{ borderTop: `4px solid ${s.color}` }}>
+                {/* Vuelta de la Card */}
+                <div className="flip-card-back" style={{ borderTop: `6px solid ${s.color}` }}>
                   <h4 className="back-title">Alcance del Servicio</h4>
                   <ul className="details-list">
                     {s.details.map((detail, idx) => (
                       <li key={idx}>{detail}</li>
                     ))}
                   </ul>
-
-                  <span className="close-hint">Volver</span>
+                  <span className="close-hint">Toca para volver</span>
                 </div>
 
               </div>
@@ -107,60 +108,67 @@ export const Services = ({ imageId = "03" }) => {
       <ModalForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Contacto Estratégico" />
 
       <style>{`
-        .services-section { background: #fff; padding: 100px 0; }
-        .services-container { max-width: 1200px; margin: 0 auto; padding: 0 4%; }
+        .services-section { 
+          background: var(--color-bg); 
+          padding: clamp(60px, 10vw, 120px) 0; 
+        }
+        .services-container { 
+          max-width: var(--container-max); 
+          margin: 0 auto; 
+          padding: 0 20px; 
+        }
         
-        .top-divider { display: flex; align-items: center; gap: 20px; margin-bottom: 60px; }
-        .ref-number { font-size: 0.7rem; font-weight: 800; color: #8b5e3c; letter-spacing: 3px; }
-        .horizontal-line { height: 1px; flex-grow: 1; background: linear-gradient(to right, #eee, transparent); }
+        .top-divider { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; }
+        .ref-number { font-size: 0.7rem; font-weight: 800; color: var(--color-accent); letter-spacing: 3px; }
+        .horizontal-line { height: 1px; flex-grow: 1; background: var(--color-border); }
 
-        /* Layout & Imagen Controlada */
         .services-layout { 
           display: grid; 
           grid-template-columns: 1fr 1fr; 
           gap: 60px; 
           align-items: center; 
-          margin-bottom: 80px; 
+          margin-bottom: clamp(40px, 8vw, 80px); 
         }
 
         .image-frame { 
-          border: 1px solid #f0f0f0; 
+          border: 1px solid var(--color-border); 
           padding: 15px;
           background: #fff;
-          line-height: 0; /* Evita espacio extra debajo de la imagen */
+          box-shadow: var(--shadow-luxe);
         }
 
         .img-controlled { 
           width: 100%; 
-          height: 400px; /* Altura fija para evitar desborde */
-          object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformarse */
+          height: clamp(300px, 40vh, 450px);
+          object-fit: cover; 
           filter: grayscale(100%);
           transition: filter 0.5s ease;
           display: block;
         }
 
-        .image-frame:hover .img-controlled {
-          filter: grayscale(0%);
-        }
+        .main-title-premium { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1; color: var(--color-primary); font-weight: 800; }
+        .accent-text { color: var(--color-accent); font-weight: 300; font-style: italic; }
+        .description-premium { color: var(--color-text-light); font-size: 1.1rem; line-height: 1.6; max-width: 500px; margin-top: 20px; }
 
-        .main-title-premium { font-size: clamp(2.5rem, 4vw, 4rem); line-height: 0.9; color: #0a192f; font-weight: 800; }
-        .accent-text { color: #8b5e3c; font-weight: 300; font-style: italic; }
-        .description-premium { color: #555; font-size: 1.1rem; line-height: 1.6; max-width: 500px; margin-top: 20px; }
-
-        /* Flip Cards */
+        /* Flip Cards Grid */
         .services-minimal-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 30px;
-          perspective: 2000px;
+          gap: 20px;
+          perspective: 1500px;
         }
 
-        .flip-card { height: 420px; cursor: pointer; }
+        .flip-card { 
+          height: 420px; 
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+        }
+
         .flip-card-inner {
           position: relative;
           width: 100%;
           height: 100%;
-          transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
           transform-style: preserve-3d;
         }
 
@@ -172,38 +180,46 @@ export const Services = ({ imageId = "03" }) => {
           height: 100%;
           backface-visibility: hidden;
           background: white;
-          border: 1px solid #f0f0f0;
-          padding: 40px;
+          border: 1px solid var(--color-border);
+          padding: 35px;
           display: flex;
           flex-direction: column;
+          border-radius: 4px;
         }
 
-        .flip-card-back { transform: rotateY(180deg); background: #fafafa; }
+        .flip-card-back { 
+          transform: rotateY(180deg); 
+          background: var(--color-bg-alt); 
+        }
 
-        .card-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
-        .card-line { height: 1px; width: 30px; margin-left: 10px; }
+        .card-tag { font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+        .card-line { height: 1px; width: 40px; margin-left: 10px; }
         .card-top { display: flex; align-items: center; margin-bottom: 20px; }
-        .card-name { font-size: 2rem; color: #0a192f; margin: 15px 0; font-weight: 700; }
-        .card-info { color: #666; line-height: 1.6; font-size: 0.95rem; }
+        .card-name { font-size: 1.8rem; color: var(--color-primary); margin: 15px 0; font-weight: 700; }
+        .card-info { color: var(--color-text-light); line-height: 1.6; font-size: 1rem; }
         
-        .card-link-mock { margin-top: auto; color: #8b5e3c; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; display: flex; align-items: center; gap: 8px; }
+        .card-link-mock { margin-top: auto; color: var(--color-accent); font-weight: 800; text-transform: uppercase; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; }
 
-        .back-title { color: #0a192f; font-size: 1rem; margin-bottom: 20px; font-weight: 800; text-transform: uppercase; }
+        .back-title { color: var(--color-primary); font-size: 0.9rem; margin-bottom: 25px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .details-list { list-style: none; padding: 0; margin-bottom: 20px; flex-grow: 1; }
-        .details-list li { font-size: 0.9rem; color: #333; margin-bottom: 10px; padding-left: 15px; position: relative; }
-        .details-list li::before { content: "→"; position: absolute; left: 0; color: #8b5e3c; }
+        .details-list li { font-size: 0.95rem; color: var(--color-text-main); margin-bottom: 12px; padding-left: 20px; position: relative; }
+        .details-list li::before { content: "•"; position: absolute; left: 0; color: var(--color-accent); font-weight: bold; }
 
-        .back-btn {
-          background: #0a192f; color: white; border: none; padding: 15px;
-          font-weight: 700; cursor: pointer; font-size: 0.75rem; letter-spacing: 1px;
+        .close-hint { display: block; text-align: center; margin-top: 10px; font-size: 0.7rem; color: var(--color-text-light); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 1100px) {
+          .services-minimal-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        .close-hint { display: block; text-align: center; margin-top: 10px; font-size: 0.6rem; color: #bbb; text-transform: uppercase; }
-
-        @media (max-width: 1024px) {
-          .services-layout { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+          .services-layout { grid-template-columns: 1fr; gap: 30px; }
           .services-minimal-grid { grid-template-columns: 1fr; }
-          .img-controlled { height: 300px; }
+          .img-controlled { height: 300px; filter: grayscale(0%); } /* Quitamos grayscale en móvil para impacto */
+          .flip-card { height: 380px; }
+          .main-title-premium { text-align: center; }
+          .description-premium { text-align: center; margin: 20px auto; }
+          .image-frame { order: -1; } /* Imagen arriba en móvil */
         }
       `}</style>
     </section>

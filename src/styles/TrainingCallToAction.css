@@ -1,0 +1,114 @@
+.training-cta {
+  padding: var(--section-padding);
+  background-color: var(--color-bg); /* Fondo limpio */
+}
+
+.cta-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cta-badge {
+  color: var(--color-success);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.cta-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--color-primary);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.text-accent {
+  color: var(--color-accent);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.cta-divider {
+  width: 60px;
+  height: 4px;
+  background: var(--color-accent);
+  margin: 0 auto 2.5rem;
+}
+
+.cta-text {
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+/* Caja de información técnica */
+.cta-info-box {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  padding: 2rem;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.info-value {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cta-subtext {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 768px) {
+  .training-cta {
+    padding: 80px 20px;
+  }
+
+  .cta-info-box {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .cta-title {
+    font-size: 2.2rem;
+  }
+
+  .btn-premium-cafe {
+    width: 100%;
+    text-align: center;
+  }
+}

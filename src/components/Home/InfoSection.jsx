@@ -1,7 +1,7 @@
 export const InfoSection = ({ sideTitle, description, infoImg, imageId = "02" }) => {
   return (
     <section className="info-container">
-      {/* 1. Encabezado con Textos Contrapuestos - Estilo Minimalista */}
+      {/* 1. Encabezado Dual */}
       <div className="dual-header">
         <div className="header-left">
           <p className="top-text">
@@ -17,10 +17,10 @@ export const InfoSection = ({ sideTitle, description, infoImg, imageId = "02" })
         </div>
       </div>
 
-      {/* 2. Bloque de Contenido (Imagen Izq | Texto Der) */}
+      {/* 2. Bloque de Contenido */}
       <div className="content-grid">
         <div className="image-box">
-          <img src={infoImg} alt={`Imagen ID: ${imageId} - Sección Informativa`} />
+          <img src={infoImg} alt={`Imagen ID: ${imageId}`} />
           <div className="image-reference-tag">Ref: IMG-{imageId}</div>
         </div>
         
@@ -35,7 +35,7 @@ export const InfoSection = ({ sideTitle, description, infoImg, imageId = "02" })
             <p className="supplementary-text">
               Nuestro enfoque combina la estética clásica con las necesidades 
               digitales del <strong>2026</strong>. Exploraremos la preparación y madurez 
-              empresarial actual para afrontar los efectos de esta nueva era.
+              empresarial actual para afrontar los efectos de esta era.
             </p>
           </div>
 
@@ -49,43 +49,38 @@ export const InfoSection = ({ sideTitle, description, infoImg, imageId = "02" })
         .info-container {
           max-width: var(--container-max);
           margin: 0 auto;
-          padding: var(--section-padding);
+          padding: clamp(60px, 10vw, 120px) 20px; /* Padding dinámico */
         }
 
-        /* Dual Header Refinado */
+        /* Dual Header */
         .dual-header {
           display: flex;
           justify-content: space-between;
           align-items: flex-end;
-          margin-bottom: 80px;
-          gap: 60px;
+          margin-bottom: clamp(40px, 8vw, 80px);
+          gap: 40px;
         }
 
         .header-left { flex: 1.2; }
-        
+        .header-right { flex: 1; text-align: right; }
+
         .top-text {
-          font-size: 1.2rem;
+          font-size: clamp(1rem, 1.2vw, 1.2rem);
           color: var(--color-text-light);
           line-height: 1.6;
-          margin-bottom: 25px;
-          max-width: 500px;
-          font-weight: 500;
+          margin-bottom: 20px;
+          max-width: 450px;
         }
 
         .line-accent-green {
-          width: 100px;
+          width: 80px;
           height: 3px;
-          background: var(--color-success); /* Verde */
-        }
-
-        .header-right {
-          flex: 1;
-          text-align: right;
+          background: var(--color-success);
         }
 
         .question-text {
-          font-size: clamp(1.8rem, 3vw, 2.8rem);
-          color: var(--color-primary); /* Azul */
+          font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+          color: var(--color-primary);
           line-height: 1.1;
         }
 
@@ -95,43 +90,32 @@ export const InfoSection = ({ sideTitle, description, infoImg, imageId = "02" })
           color: var(--color-text-light);
         }
 
-        /* Content Grid - Premium Layout */
+        /* Content Grid */
         .content-grid {
           display: grid;
           grid-template-columns: 1.1fr 0.9fr;
-          background: #fff;
+          background: var(--color-bg);
           box-shadow: var(--shadow-luxe);
           border: 1px solid var(--color-border);
+          overflow: hidden; /* Evita que la imagen rompa el radio si lo hubiera */
         }
 
         .image-box {
-          height: 600px;
+          height: 100%; /* Se adapta al contenido de texto en desktop */
+          min-height: 500px;
           position: relative;
-          overflow: hidden;
         }
 
         .image-box img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          display: block;
         }
 
-        .image-reference-tag {
-          position: absolute;
-          top: 20px;
-          left: 20px;
-          background: rgba(255,255,255,0.9);
-          padding: 5px 12px;
-          font-size: 0.65rem;
-          font-weight: 700;
-          letter-spacing: 1px;
-          color: var(--color-primary);
-        }
-
-        /* Text Box Styling */
+        /* Text Box */
         .text-box {
-          padding: 80px;
-          background: var(--color-bg);
+          padding: clamp(30px, 6vw, 80px); /* Padding que se reduce en móvil */
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -141,10 +125,10 @@ export const InfoSection = ({ sideTitle, description, infoImg, imageId = "02" })
           display: flex;
           align-items: center;
           gap: 10px;
-          font-size: 0.8rem;
-          letter-spacing: 3px;
+          font-size: 0.75rem;
+          letter-spacing: 2px;
           color: var(--color-success);
-          margin-bottom: 40px;
+          margin-bottom: 25px;
           font-weight: 700;
         }
 
@@ -156,55 +140,68 @@ export const InfoSection = ({ sideTitle, description, infoImg, imageId = "02" })
         }
 
         .side-title {
-          font-size: 1.8rem;
+          font-size: clamp(1.5rem, 2vw, 1.8rem);
           color: var(--color-primary);
-          margin-bottom: 20px;
+          margin-bottom: 15px;
+          line-height: 1.2;
         }
 
         .main-description {
-          font-size: 1.15rem;
+          font-size: 1.1rem;
           font-weight: 600;
-          color: var(--color-text-main);
-          margin-bottom: 25px;
+          margin-bottom: 20px;
         }
 
         .supplementary-text {
           color: var(--color-text-light);
-          font-size: 1rem;
-          margin-bottom: 40px;
+          margin-bottom: 30px;
+          font-size: 0.95rem;
         }
 
-        /* Botón Café Estilo Premium */
         .btn-outline-cafe {
           align-self: flex-start;
-          padding: 15px 40px;
+          padding: 14px 35px;
           background: transparent;
           border: 1.5px solid var(--color-accent);
           color: var(--color-accent);
           font-weight: 700;
-          letter-spacing: 1px;
           text-transform: uppercase;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: 0.3s ease;
         }
 
         .btn-outline-cafe:hover {
           background: var(--color-accent);
           color: white;
-          transform: translateY(-3px);
-          box-shadow: 0 10px 20px rgba(167, 112, 74, 0.2);
         }
 
+        /* --- MEDIA QUERIES CORRECTIVOS --- */
         @media (max-width: 1024px) {
-          .text-box { padding: 40px; }
-          .dual-header { gap: 30px; }
+          .dual-header { gap: 20px; }
+          .content-grid { grid-template-columns: 1fr; } /* Stack en tablet */
+          .image-box { height: 400px; min-height: auto; }
         }
 
         @media (max-width: 768px) {
-          .dual-header { flex-direction: column; align-items: flex-start; }
-          .header-right { text-align: left; }
-          .content-grid { grid-template-columns: 1fr; }
-          .image-box { height: 350px; }
+          .info-container { padding: 40px 15px; }
+
+          .dual-header {
+            flex-direction: column-reverse; /* La pregunta arriba, el texto descriptivo abajo */
+            align-items: flex-start;
+            margin-bottom: 30px;
+          }
+
+          .header-right { text-align: left; width: 100%; }
+          .header-left { margin-top: 15px; }
+
+          .top-text { font-size: 0.95rem; margin-bottom: 15px; }
+
+          .text-box { padding: 40px 20px; } /* Ajuste de aire en móvil */
+          
+          .btn-outline-cafe {
+            width: 100%; /* Botón completo en móvil */
+            text-align: center;
+          }
         }
       `}</style>
     </section>

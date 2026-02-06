@@ -1,0 +1,89 @@
+.stats-section {
+  padding: var(--section-padding);
+  background-color: var(--color-bg-alt); /* Fondo neutro y sutil */
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.stat-card {
+  background: var(--color-bg); /* Blanco puro para la card */
+  padding: 4rem 2rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+}
+
+/* En lugar de un fondo azul, usamos una sombra premium y un borde suave */
+.stat-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-luxe);
+}
+
+/* Indicador sutil de color en el lateral */
+.stat-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 25%;
+  height: 50%;
+  width: 3px;
+  background-color: var(--color-accent);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.stat-card:hover::after {
+  opacity: 1;
+}
+
+.stat-card__icon {
+  font-size: 2rem;
+  color: var(--color-primary); /* Azul solo como acento en el icono */
+  margin-bottom: 2rem;
+  opacity: 0.7;
+}
+
+.stat-card__number {
+  font-size: 4.5rem; /* Grande pero en un tono suave */
+  font-weight: 800;
+  color: var(--color-primary) !important; /* Azul marino profundo */
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -2px;
+}
+
+.stat-card__label {
+  color: var(--color-accent); /* Café Terracotta para el título del número */
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card__description {
+  color: var(--color-text-light); /* Gris suave para que no pese visualmente */
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+/* Ajustes para Móvil */
+@media (max-width: 992px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .stat-card {
+    padding: 3rem 1.5rem;
+  }
+}
